@@ -35,9 +35,22 @@ def generateKey():
         print('Error')
     return c1
 
+def writeToFileKey(filename, mode, keyNumber):
+    file = open(filename, mode)
+    file.write('Key =' + keyNumber)
+    file.close()
+
+def writeToFile(filename, mode, x1, y1, type):
+    file = open(filename, mode)
+    if type == 1:
+        file.write('Key =' + str(generateKey()))
+    elif type == 2:
+        file.write('x1 =' + x1 + '\n' + 'y1 =' + y1)
+    elif type == 3:
+        file.write('y1 =' + y1 + '\n' + 'x1 =' + x1)
+    file.close()
+
 def main():
-    d = generateKey()
-    y1 = encryptAndDecrypt(x1, e)
     print('Program start!')
     while True:
         print('Choice the operation:\n1 - Gen\n2 - Encr\n3 - Decr\n4 - Exit\n')
@@ -46,17 +59,20 @@ def main():
 
         if choicePerson == 1:
             print('---------------------------------------------------------------------')
-            print('Key =', d)
+            print('Key =', generateKey())
+            writeToFile('Report.txt', 'w', '', '', choicePerson)
             print('---------------------------------------------------------------------')
         elif choicePerson == 2:
             print('---------------------------------------------------------------------')
             print('x1 =', x1)
-            print('y1 =', y1)
+            print('y1 =', encryptAndDecrypt(x1, e))
+            writeToFile('Report.txt', 'w', str(x1), str(encryptAndDecrypt(x1, e)), choicePerson)
             print('---------------------------------------------------------------------')
         elif choicePerson == 3:
             print('---------------------------------------------------------------------')
-            print('y1 =', y1)
-            print('x1 =', encryptAndDecrypt(y1, d))
+            print('y1 =', encryptAndDecrypt(x1, e))
+            print('x1 =', encryptAndDecrypt(encryptAndDecrypt(x1, e), generateKey()))
+            writeToFile('Report.txt', 'w', str(encryptAndDecrypt(encryptAndDecrypt(x1, e), generateKey())), str(encryptAndDecrypt(x1, e)), choicePerson)
             print('---------------------------------------------------------------------')
         elif choicePerson == 4:
             print('---------------------------------------------------------------------')
