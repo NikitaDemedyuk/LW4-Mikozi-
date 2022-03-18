@@ -35,11 +35,6 @@ def generateKey():
         print('Error')
     return c1
 
-def writeToFileKey(filename, mode, keyNumber):
-    file = open(filename, mode)
-    file.write('Key =' + keyNumber)
-    file.close()
-
 def writeToFile(filename, mode, x1, y1, type):
     file = open(filename, mode)
     if type == 1:
