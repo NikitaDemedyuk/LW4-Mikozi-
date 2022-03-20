@@ -4,6 +4,7 @@ e = 372585779765210097553647509959
 n = p * q
 phi = (p - 1) * (q - 1)
 x1 = 399754188907643924420059310699
+y2 = 293314580135454643114146935352
 
 def powByMod(num: int, power: int, mod: int):
     ans = 1
@@ -48,7 +49,7 @@ def writeToFile(filename, mode, x1, y1, type):
 def main():
     print('Program start!')
     while True:
-        print('Choice the operation:\n1 - Gen\n2 - Encr\n3 - Decr\n4 - Exit\n')
+        print('Choice the operation:\n1 - Gen\n2 - Encr\n3 - Decr\n4 - Find x2\n5 - Exit\n')
         print('Enter: ', end='')
         choicePerson = int(input())
 
@@ -70,6 +71,13 @@ def main():
             writeToFile('Report.txt', 'w', str(encryptAndDecrypt(encryptAndDecrypt(x1, e), generateKey())), str(encryptAndDecrypt(x1, e)), choicePerson)
             print('---------------------------------------------------------------------')
         elif choicePerson == 4:
+            print('---------------------------------------------------------------------')
+            print('y2 =', y2)
+            print('x2 =', encryptAndDecrypt(y2, generateKey()))
+            print('y2 =', encryptAndDecrypt(encryptAndDecrypt(y2, generateKey()), e))
+            writeToFile('Report.txt', 'w', str(y2), str(encryptAndDecrypt(y2, generateKey())), choicePerson)
+            print('---------------------------------------------------------------------')
+        elif choicePerson == 5:
             print('---------------------------------------------------------------------')
             print('Exit')
             print('---------------------------------------------------------------------')
